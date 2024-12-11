@@ -1,4 +1,4 @@
-package ma.emsi.g1.tp1ayaboujja;
+package ma.emsi.g1.tp1ayaboujja.jsf;
 
 
 
@@ -20,7 +20,7 @@ import java.util.Locale;
  */
 @Named
 @ViewScoped
-public class Bb implements Serializable {
+public class bb implements Serializable {
 
     /**
      * Rôle "système" que l'on attribuera plus tard à un LLM.
@@ -41,6 +41,38 @@ public class Bb implements Serializable {
      * Dernière réponse de l'API OpenAI.
      */
     private String reponse;
+
+    private boolean debug;
+
+    public boolean isDebug() {
+        return debug;
+    }
+
+    public void setDebug(boolean debug) {
+        this.debug = debug;
+    }
+
+
+    private String texteRequeteJson;
+
+    public String getTexteRequeteJson() {
+        return texteRequeteJson;
+    }
+
+    public void setTexteRequeteJson(String texteRequeteJson) {
+        this.texteRequeteJson = texteRequeteJson;
+    }
+
+
+    private String texteReponseJson;
+
+    public String getTexteReponseJson() {
+        return texteReponseJson;
+    }
+
+    public void setTexteReponseJson(String texteReponseJson) {
+        this.texteReponseJson = texteReponseJson;
+    }
     /**
      * La conversation depuis le début.
      */
@@ -49,13 +81,14 @@ public class Bb implements Serializable {
     /**
      * Contexte JSF. Utilisé pour qu'un message d'erreur s'affiche dans le formulaire.
      */
+
     @Inject
     private FacesContext facesContext;
 
     /**
      * Obligatoire pour un bean CDI (classe gérée par CDI).
      */
-    public Bb() {
+    public bb() {
     }
 
     public String getSystemRole() {
@@ -144,6 +177,10 @@ public class Bb implements Serializable {
         return "index";
     }
 
+    public void toggleDebug() {
+        this.setDebug(!isDebug());
+    }
+
     /**
      * Pour afficher la conversation dans le textArea de la page JSF.
      */
@@ -177,4 +214,5 @@ public class Bb implements Serializable {
         this.systemRole = (String) listeSystemRoles.get(0).getValue();
         return listeSystemRoles;
     }
+
 }
